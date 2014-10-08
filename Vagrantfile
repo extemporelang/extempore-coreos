@@ -87,9 +87,13 @@ Vagrant.configure("2") do |config|
 
       ip = "172.17.8.#{i+100}"
       config.vm.network :private_network, ip: ip
+      
+      # extempore primary process (count up from port 7099 on host)
+      config.vm.network "forwarded_port", guest: 7099, host: (7099 + i - 1), auto_correct: true
 
-      # forward the port for the extempore primary process
-      config.vm.network "forwarded_port", guest: 7099, host: 7099, auto_correct: true
+      # fleet api
+      config.vm.network "forwarded_port", guest: 8080, host: (8080 + i - 1), auto_correct: true
+      
       # Uncomment below to enable NFS for sharing the host machine into the coreos-vagrant VM.
       #config.vm.synced_folder ".", "/home/core/share", id: "core", :nfs => true, :mount_options => ['nolock,vers=3,udp']
 
