@@ -23,8 +23,6 @@ coreos:
       WantedBy=sockets.target
   - name: fleet.service
     command: start
-.service
-      command: start
 
 # Local Variables:
 # major-mode: conf-mode
