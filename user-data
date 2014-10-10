@@ -25,5 +25,5 @@ coreos:
     command: start
 
 # Local Variables:
-# major-mode: conf-mode
+# mode: conf
 # End:
