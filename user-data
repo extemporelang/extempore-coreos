@@ -21,6 +21,9 @@ coreos:
 
       [Install]
       WantedBy=sockets.target
+
+      [X-Fleet]
+      Global=true
   - name: fleet.service
     command: start
 
