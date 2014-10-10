@@ -89,7 +89,7 @@ Vagrant.configure("2") do |config|
       config.vm.network :private_network, ip: ip
       
       # extempore primary process (count up from port 7099 on host)
-      config.vm.network "forwarded_port", guest: 7099, host: (7099 + i - 1), auto_correct: true
+      config.vm.network "forwarded_port", guest: 7099, host: (17099 + i - 1), auto_correct: true
 
       # fleet api
       config.vm.network "forwarded_port", guest: 8080, host: (8080 + i - 1), auto_correct: true
