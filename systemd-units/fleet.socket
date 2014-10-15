@@ -1,0 +1,9 @@
+[Socket]
+# Talk to the API over a Unix domain socket (default)
+# ListenStream=/var/run/fleet.sock
+# Talk to the API over an exposed port, uncomment to enable and choose a port
+ListenStream=8080
+Service=fleet.service
+
+[Install]
+WantedBy=sockets.target
