@@ -1,7 +1,7 @@
 #cloud-config
 coreos:
   etcd:
-    discovery: https://discovery.etcd.io/30857a03766a605d6077b38beda84c5e
+    discovery: https://discovery.etcd.io/1eae1e0072a48c21a06d5ff1fc2d2d7c
     addr: $public_ipv4:4001
     peer-addr: $public_ipv4:7001
   fleet:
@@ -47,7 +47,3 @@ coreos:
 
       [X-Fleet]
       Global=true
-
-# Local Variables:
-# mode: conf
-# End:
