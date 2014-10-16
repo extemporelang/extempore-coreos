@@ -11,6 +11,9 @@ coreos:
     command: start
   - name: fleet.service
     command: start
+users:
+  - name: core
+    coreos-ssh-import-github: benswift
 write_files:
   - path: /etc/logstash.conf
     permissions: 0644
