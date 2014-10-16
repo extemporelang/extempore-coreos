@@ -1,7 +1,7 @@
 #cloud-config
 coreos:
   etcd:
-    discovery: https://discovery.etcd.io/1eae1e0072a48c21a06d5ff1fc2d2d7c
+    discovery: https://discovery.etcd.io/0193a3d459a52f54259a482c27293ee0
     addr: $public_ipv4:4001
     peer-addr: $public_ipv4:7001
   fleet:
@@ -11,9 +11,6 @@ coreos:
     command: start
   - name: fleet.service
     command: start
-users:
-  - name: core
-    coreos-ssh-import-github: benswift
 write_files:
   - path: /etc/logstash.conf
     permissions: 0644
@@ -23,20 +20,20 @@ write_files:
         stdin {
           type => "stdin-type"
         }
-      
+
         syslog {
           # use all defaults
         }
-          
+
         # file {
         #   type => "syslog"
               #   path => [ "/var/log/*.log", "/var/log/messages", "/var/log/syslog" ]
         #   start_position => "beginning"
         # }
       }
-       
+
       output {
-        stdout { 
+        stdout {
           codec => rubydebug
         }
       
