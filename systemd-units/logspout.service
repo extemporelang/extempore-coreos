@@ -6,7 +6,7 @@ Requires=docker.service
 Requires=logstash.service
 
 [Service]
-TimeoutSec=0
+TimeoutStartSec=0
 KillMode=none
 
 ExecStartPre=-/usr/bin/docker pull progrium/logspout
