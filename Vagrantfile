@@ -5,7 +5,7 @@ require 'fileutils'
 
 Vagrant.require_version ">= 1.6.0"
 
-CLOUD_CONFIG_PATH = File.join(File.dirname(__FILE__), "user-data")
+CLOUD_CONFIG_PATH = File.join(File.dirname(__FILE__), "cloud-config.yaml")
 CONFIG = File.join(File.dirname(__FILE__), "config.rb")
 
 # Defaults for config options defined in CONFIG
@@ -87,7 +87,7 @@ Vagrant.configure("2") do |config|
 
       ip = "172.17.8.#{i+100}"
       config.vm.network :private_network, ip: ip
-
+      
       # extempore primary process (count up from port 7099 on host)
       config.vm.network "forwarded_port", guest: 7099, host: (17099 + i - 1), auto_correct: true
 
