@@ -1,23 +1,23 @@
 [Unit]
 Description=Logspout service
-Requires=docker.service
 After=docker.service
 After=logstash.service
+Requires=docker.service
+Requires=logstash.service
 
 [Service]
 TimeoutSec=0
 KillMode=none
 
-ExecStartPre=-/usr/bin/docker kill progrium/logspout
 ExecStartPre=-/usr/bin/docker pull progrium/logspout
 
 ExecStart=/bin/bash -c "exec /usr/bin/docker run --rm --name logspout --hostname logspout-$(hostname) --volume /var/run/docker.sock:/tmp/docker.sock progrium/logspout syslog://$(etcdctl get /logstash/host):514"
 
-ExecStop=/usr/bin/docker stop progrium/logspout
+ExecStop=/usr/bin/docker stop logspout
 
 Restart=on-failure
 TimeoutSec=300
 RestartSec=1
 
 [X-Fleet]
-X-Conflicts=logspout.service
+Global=true
