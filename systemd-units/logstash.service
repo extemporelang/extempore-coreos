@@ -10,9 +10,9 @@ KillMode=none
 EnvironmentFile=/etc/environment
 ExecStartPre=-/usr/bin/docker pull pblittle/docker-logstash
 
-ExecStart=/usr/bin/docker run -e LOGSTASH_CONFIG_URL=https://gist.githubusercontent.com/benswift/a487dd50cea232923a8c/raw/233e567dc2ccce893d56330a5d0a09e636be3dac/logstash.conf -p 9292:9292 -p 9200:9200 pblittle/docker-logstash
+ExecStart=/usr/bin/docker run --name logstash -e LOGSTASH_CONFIG_URL=https://gist.githubusercontent.com/benswift/a487dd50cea232923a8c/raw/233e567dc2ccce893d56330a5d0a09e636be3dac/logstash.conf -p 9292:9292 -p 9200:9200 pblittle/docker-logstash
 ExecStartPost=/usr/bin/etcdctl set /logstash/host ${COREOS_PUBLIC_IPV4}
-ExecStop=/usr/bin/docker stop pblittle/docker-logstash
+ExecStop=/usr/bin/docker stop logstash
 ExecStopPost=/usr/bin/etcdctl rm --dir --recursive /logstash
 
 Restart=on-failure
