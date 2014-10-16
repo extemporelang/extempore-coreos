@@ -1,9 +1,7 @@
 [Unit]
 Description=Logspout service
 After=docker.service
-After=logstash.service
 Requires=docker.service
-Requires=logstash.service
 
 [Service]
 TimeoutStartSec=0
