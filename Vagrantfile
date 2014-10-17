@@ -94,8 +94,9 @@ Vagrant.configure("2") do |config|
       # fleet api
       config.vm.network "forwarded_port", guest: 8080, host: (8080 + i - 1), auto_correct: true
 
-      # logstash
-      config.vm.network "forwarded_port", guest: 9292, host: (9292 + i - 1), auto_correct: true
+      # logstash/elasticsearch/kibana - just go through the static IP address instead
+      # config.vm.network "forwarded_port", guest: 9200, host: (9200 + i - 1), auto_correct: true
+      # config.vm.network "forwarded_port", guest: 9292, host: (9292 + i - 1), auto_correct: true
 
       # Uncomment below to enable NFS for sharing the host machine into the coreos-vagrant VM.
       #config.vm.synced_folder ".", "/home/core/share", id: "core", :nfs => true, :mount_options => ['nolock,vers=3,udp']
