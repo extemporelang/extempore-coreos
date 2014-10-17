@@ -9,6 +9,5 @@ fleetctl list-machines
 
 dashboard can be seen at
 
-=http://localhost:9292/index.html#/dashboard/file/logstash.json=
+(browse-url "http://172.17.8.101:9292/index.html#/dashboard/file/logstash.json")
 
-(browse-url "http://127.0.0.1:9293/index.html#/dashboard/file/logstash.json")
