@@ -2,6 +2,8 @@
 Description=Extempore
 After=docker.service
 Requires=docker.service
+Wants=logspout.service
+After=logspout.service
 
 [Service]
 TimeoutStartSec=0

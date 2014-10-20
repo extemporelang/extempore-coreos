@@ -2,8 +2,7 @@
 Description=Logspout service
 After=docker.service
 Requires=docker.service
-After=logstash.service
-Requires=logstash.service
+BindsTo=extempore.service
 
 [Service]
 TimeoutStartSec=0
