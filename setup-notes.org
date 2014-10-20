@@ -7,7 +7,13 @@ fleetctl list-machines
 
 * Logstash
 
-dashboard can be seen at
+dashboard link:
 
 (browse-url "http://172.17.8.101:9292/index.html#/dashboard/file/logstash.json")
+(browse-url "http://172.17.8.102:9292/index.html#/dashboard/file/logstash.json")
 
+* socat
+
+this works for forwarding connections (tested with Extempore)
+
+socat -u TCP4-LISTEN:7123,reuseaddr,fork TCP4-CONNECT:localhost:7099
