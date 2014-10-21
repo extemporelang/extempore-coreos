@@ -2,19 +2,18 @@
 Description=Extempore
 After=docker.service
 Requires=docker.service
-Wants=logspout.service
-After=logspout.service
+# Wants=logspout.service
+# After=logspout.service
 
 [Service]
 TimeoutStartSec=0
 KillMode=none
 
-ExecStartPre=-/usr/bin/docker rm extempore
-ExecStartPre=-/usr/bin/docker pull benswift/extempore
+ExecStartPre=-/usr/bin/docker pull benswift/extempore:latest
 
-ExecStart=/usr/bin/docker run --rm --name extempore -p 7099:7099 -p 7098:7098 --privileged benswift/extempore --nodevice
+ExecStart=/usr/bin/docker run --rm --name extempore-%H -p 7099:7099 -p 7098:7098 --privileged benswift/extempore --noaudio
 
-ExecStop=-/usr/bin/docker stop extempore
+ExecStop=-/usr/bin/docker kill extempore-%H
 
 [X-Fleet]
 Global=true

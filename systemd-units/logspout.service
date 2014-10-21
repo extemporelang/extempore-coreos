@@ -2,18 +2,17 @@
 Description=Logspout service
 After=docker.service
 Requires=docker.service
-BindsTo=extempore.service
+# BindsTo=extempore.service
 
 [Service]
 TimeoutStartSec=0
 KillMode=none
 
-ExecStartPre=-/usr/bin/docker rm logspout
-ExecStartPre=-/usr/bin/docker pull progrium/logspout
+ExecStartPre=-/usr/bin/docker pull progrium/logspout:latest
 
 ExecStart=/bin/bash -c "exec /usr/bin/docker run --rm --name logspout -p 8000:8000 -v=/var/run/docker.sock:/tmp/docker.sock progrium/logspout syslog://$(etcdctl get /logstash/host):514"
 
-ExecStop=-/usr/bin/docker stop logspout
+ExecStop=/usr/bin/docker stop logspout
 
 Restart=on-failure
 TimeoutSec=300
