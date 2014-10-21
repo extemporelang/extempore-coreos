@@ -14,7 +14,7 @@ ExecStartPre=-/usr/bin/docker pull benswift/extempore
 
 ExecStart=/usr/bin/docker run --rm --name extempore -p 7099:7099 -p 7098:7098 --privileged benswift/extempore --nodevice
 
-ExecStop=/usr/bin/docker stop extempore
+ExecStop=-/usr/bin/docker stop extempore
 
 [X-Fleet]
 Global=true
