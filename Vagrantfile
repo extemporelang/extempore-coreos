@@ -87,12 +87,15 @@ Vagrant.configure("2") do |config|
 
       ip = "172.17.8.#{i+100}"
       config.vm.network :private_network, ip: ip
-      
-      # extempore primary process (count up from port 7099 on host)
-      config.vm.network "forwarded_port", guest: 7099, host: (17099 + i - 1), auto_correct: true
 
-      # fleet api
-      config.vm.network "forwarded_port", guest: 8080, host: (8080 + i - 1), auto_correct: true
+      if $expose_fleet_tcp
+        config.vm.network "forwarded_port", guest: 8080, host: ($expose_fleet_tcp + i - 1), auto_correct: true
+      end
+
+      if $expose_extempore_tcp
+        # extempore primary process (count up from port 7099 on host)
+        config.vm.network "forwarded_port", guest: 7099, host: ($expose_extempore_tcp + i - 1), auto_correct: true
+      end
 
       # logstash/elasticsearch/kibana - just go through the static IP address instead
       # config.vm.network "forwarded_port", guest: 9200, host: (9200 + i - 1), auto_correct: true
