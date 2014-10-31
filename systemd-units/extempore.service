@@ -15,5 +15,9 @@ ExecStart=/usr/bin/docker run --rm --name extempore-%H -p 7099:7099 -p 7098:7098
 
 ExecStop=-/usr/bin/docker kill extempore-%H
 
+Restart=on-failure
+# TimeoutSec=300
+RestartSec=1
+
 [X-Fleet]
 Global=true
