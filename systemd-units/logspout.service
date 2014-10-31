@@ -10,7 +10,7 @@ KillMode=none
 
 ExecStartPre=-/usr/bin/docker pull progrium/logspout:latest
 
-ExecStart=/bin/bash -c "exec /usr/bin/docker run --rm --name logspout -p 8000:8000 -v=/var/run/docker.sock:/tmp/docker.sock progrium/logspout syslog://$(etcdctl get /logstash/host):514"
+ExecStart=/bin/bash -c "exec /usr/bin/docker run --rm --name logspout -p 8000:8000 -v=/var/run/docker.sock:/tmp/docker.sock progrium/logspout"
 
 ExecStop=/usr/bin/docker stop logspout
 
