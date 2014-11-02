@@ -10,10 +10,11 @@ TimeoutStartSec=0
 KillMode=none
 
 ExecStartPre=-/usr/bin/docker pull benswift/extempore:latest
+ExecStartPre=-/usr/bin/docker rm --force extempore-%H
 
-ExecStart=/usr/bin/docker run --rm --name extempore-%H -p 7099:7099 -p 7098:7098 -p 7199:7199 --privileged benswift/extempore --noaudio
+ExecStart=/usr/bin/docker run --name extempore-%H -p 7099:7099 -p 7098:7098 -p 7199:7199 --privileged benswift/extempore --noaudio
 
-ExecStop=-/usr/bin/docker kill extempore-%H
+ExecStop=-/usr/bin/docker stop extempore-%H
 
 Restart=on-failure
 # TimeoutSec=300
