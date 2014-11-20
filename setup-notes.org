@@ -1,6 +1,6 @@
 #+BEGIN_SRC sh
 vagrant up
-export FLEETCTL_TUNNEL=127.0.0.1:2222  # check host:port is correct
+export FLEETCTL_TUNNEL=10.211.55.11:22  # check host:port is correct
 ssh-add ~/.vagrant.d/insecure_private_key
 fleetctl list-machines
 #+END_SRC
