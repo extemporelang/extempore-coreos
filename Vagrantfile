@@ -25,7 +25,7 @@ if File.exists?('cloud-config.yaml') && ARGV[0].eql?('up')
 end
 
 # options
-$num_instances = 3
+$num_instances = 4
 $update_channel = "alpha"
 $vb_gui = false
 $vb_memory = 1024
