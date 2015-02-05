@@ -56,8 +56,9 @@ Vagrant.configure("2") do |config|
         vb.gui = $vb_gui
       end
 
-      ip = "192.168.50.#{i+100}"
-      config.vm.network :private_network, ip: ip
+      # don't need to have an ip for the box
+      # ip = "192.168.59.#{i+100}"
+      # config.vm.network :private_network, ip: ip
 
       if $expose_fleet_tcp
         config.vm.network "forwarded_port", guest: 8080, host: ($expose_fleet_tcp + i - 1), auto_correct: true
