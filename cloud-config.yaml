@@ -1,28 +1,17 @@
-#cloud-config
+#cloud-config for CoreOS on bare metal
 coreos:
   etcd:
-    discovery: https://discovery.etcd.io/0193a3d459a52f54259a482c27293ee0
-    addr: $public_ipv4:4001
-    peer-addr: $public_ipv4:7001
-  fleet:
-    public-ip: $public_ipv4
+    # generate a new token for each unique cluster from https://discovery.etcd.io/new
+    discovery: https://discovery.etcd.io/ffb6754b44f9404d2ca20a04b7835890
+    # multi-region and multi-cloud deployments need to use $public_ipv4, but they're
+    # not used for bare-metal install
+    # addr: $private_ipv4:4001
+    # peer-addr: $private_ipv4:7001
   units:
-  - name: etcd.service
-    command: start
-  - name: fleet.service
-    command: start
-  - name: fleet.socket
-    command: start
-    content: |
-      [Socket]
-      # Talk to the API over a Unix domain socket (default)
-      #ListenStream=/var/run/fleet.sock
-      # Talk to the API over an exposed port, uncomment to enable and choose a port
-      ListenStream=8080
-      Service=fleet.service
-
-      [Install]
-      WantedBy=sockets.target
-
-      [X-Fleet]
-      Global=true
+    - name: etcd.service
+      command: start
+    - name: fleet.service
+      command: start
+ssh_authorized_keys:
+  # include one or more SSH public keys
+  - ssh-dss AAAAB3NzaC1kc3MAAACBAIDkdaSXrykPiumUQPqyqOQrZFimBazKuGeWDeM5kW00LB4OYpY7LkxWRmhXsKlrqv4LMAS661V+u8rfedOW7JJ28igadGGt3u1RnMNNCevjR9v2wppsPoBviVRY2RqjB7CuBClJF2Y+PitsHDTwuh6ojgr7odyplB0BF7bUUztNAAAAFQCMYTZQMMdzwxxDPHuOX/aL5UYBewAAAIBHdx8mr2pBVALQWG6/Yi0y19mhAwNF1OiITiz7Ug8+hKDMfoRciPcR8TutO83lMSVDiQlpnVMmZs+iqQb+PYu8XXHituK/5Pl9lA/zAMJMu+sk01SdHDHsST1sHNqpMjefEPRA2awjsnMgdGsVPdlJKPd5kSFMNkcyJAoVbM25vgAAAIB5eRoYCvKAuBZ/+Ug1vbXecK9zyAlCV9a6kE1Y4VebXmDXZX2uG95Bf8vfC9tvOBRf4Z1/+seS25qE1WkYoYSDCdfzesw+b9ecc5YWLdK+1ZAOuzMeTm2dAhU5C6Hr2IPb6UHhVgPxl7+33QCybnkgrddmvc3fnZ01zF+2h5s04g== ben@hodgey.local
