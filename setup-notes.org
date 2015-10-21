@@ -1,6 +1,6 @@
 #+BEGIN_SRC sh
 vagrant up
-export FLEETCTL_TUNNEL=10.211.55.11:22  # check host:port is correct
+export FLEETCTL_TUNNEL=10.211.55.14:22  # check host:port is correct
 ssh-add ~/.vagrant.d/insecure_private_key
 fleetctl list-machines
 #+END_SRC
@@ -17,3 +17,34 @@ dashboard link:
 this works for forwarding connections (tested with Extempore)
 
 socat -u TCP4-LISTEN:7123,reuseaddr,fork TCP4-CONNECT:localhost:7099
+
+* bare metal install
+
+- create iso DVD/USB
+  =https://coreos.com/os/docs/latest/booting-with-iso.html=
+- bring up box with that image
+- download install script: =wget https://raw.githubusercontent.com/coreos/init/master/bin/coreos-install && chmod +x coreos-install=
+- grab a =cloud-config.yaml= such as =https://raw.githubusercontent.com/benswift/coreos-extempore/master/cloud-config.yaml=
+- =sudo ./coreos-install -d /dev/sda -c cloud-config.yaml=
+
+If you get a weird blockrpt error, just restart and try again.
+
+done!
+
+- (optional) =sudo sysctl kernel.hostname=HOSTNAME=
+
+* networking
+
+** MAC addresses
+
+- coreos-01 =78:2b:cb:a5:96:e9=
+- coreos-02 =78:2b:cb:a5:97:40=
+- coreos-03 =78:2b:cb:b7:0d:9a=
+
+** DNS
+   
+** ssh
+
+=ssh -i ~/.ssh/id_coreos core@192.168.11.FOO=
+
+key password is extempore
